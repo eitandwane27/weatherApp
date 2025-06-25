@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Weather Dashboard</title>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Modern Icon Libraries -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+        <!-- Add GSAP for advanced animations -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <!-- Add Lottie Player -->
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+    </head>
+    <body class="dark-theme">
+        <div class="dashboard-container animate__animated animate__fadeIn">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div
+                    class="logo animate__animated animate__fadeInLeft animation"
+                    id="animation"
+                >
+                    <lottie-player
+                        src="https://assets10.lottiefiles.com/packages/lf20_xlky4kvh.json"
+                        background="transparent"
+                        speed="1"
+                        style="width: 40px; height: 40px"
+                        loop
+                        autoplay
+                    ></lottie-player>
+                </div>
+                <nav class="nav-menu">
+                    <a
+                        href="#"
+                        class="active animate__animated animate__fadeInLeft"
+                        style="animation-delay: 0.1s"
+                    >
+                        <i class="ri-cloud-fill"></i>
+                        <span>Weather</span>
+                    </a>
+                    <!--  
+                    <a
+                        href="#"
+                        class="animate__animated animate__fadeInLeft"
+                        style="animation-delay: 0.2s"
+                    >
+                        <i class="ri-map-pin-fill"></i>
+                        <span>Cities</span>
+                    </a>
+                    <a
+                        href="#"
+                        class="animate__animated animate__fadeInLeft"
+                        style="animation-delay: 0.3s"
+                    >
+                        <i class="ri-map-2-fill"></i>
+                        <span>Map</span>
+                    </a>
+                    <a
+                        href="#"
+                        class="animate__animated animate__fadeInLeft"
+                        style="animation-delay: 0.4s"
+                    >
+                        <i class="ri-settings-4-fill"></i>
+                        <span>Settings</span>
+                    </a>-->
+                </nav>
+                <!-- Theme Toggle -->
+                <div class="theme-toggle-wrapper">
+                    <button
+                        id="themeToggle"
+                        class="theme-toggle animate__animated animate__fadeInLeft"
+                        style="animation-delay: 0.5s"
+                    >
+                        <div class="toggle-icons">
+                            <i class="ri-sun-fill sun-icon"></i>
+                            <i class="ri-moon-fill moon-icon"></i>
+                        </div>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <form id="weatherForm" class="search">
+                        <input
+                            type="text"
+                            id="cityInput"
+                            placeholder="Search for cities..."
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <button type="submit">Go</button>
+                    </form>
+                </div>
+
+                <!-- Weather Info -->
+                <div class="weather-container">
+                    <div
+                        class="current-weather animate__animated animate__fadeInUp"
+                    >
+                        <div class="location-info">
+                            <h1 id="cityName">--</h1>
+                            <p class="weather-description" id="weatherDesc">
+                                --
+                            </p>
+                            <div class="temperature-display">
+                                <span id="temperature">--</span>°
+                            </div>
+                            <div class="weather-details">
+                                <div class="detail-item">
+                                    <i class="ri-drop-fill"></i>
+                                    <span>Chance of rain: </span>
+                                    <span id="rainChance" class="value"
+                                        >--%</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <i class="ri-temp-hot-fill"></i>
+                                    <span>Feels like: </span>
+                                    <span id="realFeel" class="value">--°</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weather-icon-large">
+                            <lottie-player
+                                id="mainWeatherAnimation"
+                                src=""
+                                background="transparent"
+                                speed="1"
+                                style="width: 180px; height: 180px"
+                                loop
+                                autoplay
+                            ></lottie-player>
+                        </div>
+                    </div>
+
+                    <!-- Today's Forecast -->
+                    <div
+                        class="forecast-panel animate__animated animate__fadeInUp"
+                        style="animation-delay: 0.2s"
+                    >
+                        <h3>TODAY'S FORECAST</h3>
+                        <div class="hourly-forecast" id="hourlyForecast">
+                            <!-- Hourly forecast items will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Air Conditions -->
+                    <div
+                        class="air-conditions animate__animated animate__fadeInUp"
+                        style="animation-delay: 0.3s"
+                    >
+                        <div class="panel-header">
+                            <h3>AIR CONDITIONS</h3>
+                        </div>
+                        <div class="conditions-grid">
+                            <div class="condition-item">
+                                <div class="condition-icon">
+                                    <i class="ri-temp-hot-fill"></i>
+                                </div>
+                                <div class="condition-data">
+                                    <span class="condition-label"
+                                        >Real Feel</span
+                                    >
+                                    <span class="condition-value" id="realFeel2"
+                                        >--°</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="condition-item">
+                                <div class="condition-icon">
+                                    <i class="ri-windy-fill"></i>
+                                </div>
+                                <div class="condition-data">
+                                    <span class="condition-label">Wind</span>
+                                    <span class="condition-value" id="windSpeed"
+                                        >-- km/h</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="condition-item">
+                                <div class="condition-icon">
+                                    <i class="ri-drop-fill"></i>
+                                </div>
+                                <div class="condition-data">
+                                    <span class="condition-label"
+                                        >Chance of rain</span
+                                    >
+                                    <span
+                                        class="condition-value"
+                                        id="rainChance2"
+                                        >--%</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="condition-item">
+                                <div class="condition-icon">
+                                    <i class="ri-sun-fill"></i>
+                                </div>
+                                <div class="condition-data">
+                                    <span class="condition-label"
+                                        >UV Index</span
+                                    >
+                                    <span class="condition-value" id="uvIndex"
+                                        >--</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- 7-Day Forecast Sidebar -->
+            <aside
+                class="forecast-sidebar animate__animated animate__fadeInRight"
+            >
+                <h3>7-DAY FORECAST</h3>
+                <div class="weekly-forecast" id="weeklyForecast">
+                    <!-- Weekly forecast items will be dynamically added here -->
+                </div>
+            </aside>
+        </div>
+
+        <div id="loading" class="loading"></div>
+
+        <!-- Error Notification -->
+        <div id="notification" class="notification">
+            <div class="notification-icon">
+                <i class="ri-error-warning-fill"></i>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">City Not Found</div>
+                <div class="notification-message">
+                    Please check the city name and try again.
+                </div>
+            </div>
+            <div class="notification-close">
+                <i class="ri-close-line"></i>
+            </div>
+        </div>
+
+        <script src="script.js" type="module"></script>
+    </body>
+</html>
