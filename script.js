@@ -57,13 +57,12 @@ const WeatherApp = {
     // Theme Management
     theme: {
         init() {
-            const prefersDark = window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            ).matches;
+            // Always start with light theme
+            const prefersDark = false;
 
             // Set initial theme
-            document.body.classList.toggle("dark-theme", prefersDark);
-            document.body.classList.toggle("light-theme", !prefersDark);
+            document.body.classList.remove("dark-theme");
+            document.body.classList.add("light-theme");
 
             // Apply initial styles without animation
             const colors = {
@@ -98,10 +97,13 @@ const WeatherApp = {
                     ".forecast-panel, .air-conditions"
                 );
                 panels.forEach((panel) => {
-                    panel.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
-                    panel.style.border = currentColors.cardBorder;
-                    panel.style.boxShadow = currentColors.cardShadow;
-                    panel.style.backdropFilter = "blur(10px)";
+                    if (!panel.closest(".search-container")) {
+                        panel.style.backgroundColor =
+                            "rgba(255, 255, 255, 0.9)";
+                        panel.style.border = currentColors.cardBorder;
+                        panel.style.boxShadow = currentColors.cardShadow;
+                        panel.style.backdropFilter = "blur(10px)";
+                    }
                 });
 
                 const forecastDays = document.querySelectorAll(".forecast-day");
@@ -182,17 +184,6 @@ const WeatherApp = {
                     {
                         backgroundColor: "rgba(255, 255, 255, 0.9)",
                         border: currentColors.cardBorder,
-                        boxShadow: currentColors.cardShadow,
-                        backdropFilter: "blur(10px)",
-                        duration: 0.6,
-                    },
-                    0
-                );
-                tl.to(
-                    [".search-container form"],
-                    {
-                        backgroundColor: "rgba(255, 255, 255, 0.9)",
-                        border: "none",
                         boxShadow: currentColors.cardShadow,
                         backdropFilter: "blur(10px)",
                         duration: 0.6,

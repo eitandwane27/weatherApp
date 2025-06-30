@@ -11,7 +11,7 @@
     --card-shadow: 0 8px 20px rgba(128, 206, 230, 0.1);
     --accent-yellow: #ffb800;
     --shadow: 0 4px 20px rgba(91, 139, 254, 0.08);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.3s ease;
 }
 
 /* Dark theme variables */
@@ -306,6 +306,14 @@ body {
 .search-container {
     margin-bottom: 24px;
     padding: 0 10px;
+    background: transparent;
+}
+
+.search-container form {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
 }
 
 .search {
@@ -542,7 +550,8 @@ body {
     box-shadow: var(--shadow);
     flex-shrink: 0;
     margin-bottom: 0;
-    height: 25vh;
+    height: auto;
+    min-height: 180px;
 }
 
 .panel-header {
@@ -800,7 +809,8 @@ body {
 }
 
 .condition-item:hover {
-    transform: scale(1.05);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(128, 206, 230, 0.15);
 }
 
 /* Weather Icons */
@@ -1036,29 +1046,23 @@ button,
 .dark-theme .current-weather,
 .dark-theme .forecast-day {
     background-color: var(--card-bg) !important;
-    border: none !important;
+    border: 1px solid var(--border-color) !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 20px !important;
 }
 
 .dark-theme .forecast-day {
     background-color: var(--card-bg) !important;
-    border: none !important;
+    border: 1px solid var(--border-color) !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
+    padding: 16px !important;
 }
 
-.dark-theme .forecast-day:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-.dark-theme #cityInput {
-    background-color: var(--card-bg);
-    border-color: var(--border-color);
-    box-shadow: none;
-}
-
+/* Base styles for containers */
 .forecast-panel,
 .air-conditions,
 .current-weather,
@@ -1068,106 +1072,72 @@ button,
     box-shadow: var(--card-shadow);
     backdrop-filter: blur(10px);
     border-radius: 12px;
-    transition: var(--transition);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
 }
 
+.forecast-day {
+    padding: 16px;
+}
+
+/* Remove size changes on hover */
 .forecast-panel:hover,
 .air-conditions:hover,
 .current-weather:hover,
 .forecast-day:hover {
-    transform: translateY(-2px);
+    transform: none;
     box-shadow: 0 12px 25px rgba(128, 206, 230, 0.15);
 }
 
-.search-container form {
-    border: none;
-    box-shadow: var(--card-shadow);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    transition: var(--transition);
-}
-
-/* Ensure consistent dark mode styling */
-.dark-theme .forecast-panel,
-.dark-theme .air-conditions,
-.dark-theme .current-weather,
-.dark-theme .forecast-day,
-.dark-theme .search-container form {
-    background-color: var(--card-bg) !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-}
-
-/* Dark theme overrides for hourly and condition items */
-.dark-theme .hourly-item,
-.dark-theme .condition-item {
-    background-color: var(--card-bg) !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-}
-
-.dark-theme .hourly-item:hover,
-.dark-theme .condition-item:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-.dark-theme .forecast-day {
-    background-color: var(--card-bg) !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-}
-
+.dark-theme .forecast-panel:hover,
+.dark-theme .air-conditions:hover,
+.dark-theme .current-weather:hover,
 .dark-theme .forecast-day:hover {
     transform: none;
     box-shadow: none;
 }
 
-/* Ensure consistent dark mode styling */
-.dark-theme .forecast-panel,
-.dark-theme .air-conditions,
-.dark-theme .current-weather,
-.dark-theme .forecast-day {
-    background-color: var(--card-bg) !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-}
-
-.dark-theme .condition-item {
-    background: #171b20 !important; /* Darker than var(--card-bg) */
+/* Ensure consistent sizing for hourly items */
+.hourly-item {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem;
     border: 1px solid var(--border-color);
-    transform: translateY(0) translateZ(0);
-    transition: transform 0.3s linear, box-shadow 0.3s linear;
-    will-change: transform;
-    backface-visibility: hidden;
-}
-
-.dark-theme .condition-icon {
-    background: none;
-}
-
-.dark-theme .condition-item:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    transform: scale(1.03) translateZ(0);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .dark-theme .hourly-item {
     background: #171b20 !important;
-    will-change: transform;
-    backface-visibility: hidden;
+    border: 1px solid var(--border-color) !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 1rem !important;
+}
+
+/* Ensure consistent sizing for condition items */
+.condition-item {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform: translateZ(0);
-    transition: transform 0.3s linear, box-shadow 0.3s linear;
+    will-change: transform, box-shadow;
 }
 
-.dark-theme .hourly-item:hover {
+.dark-theme .condition-item {
+    background: #171b20 !important;
+    border: 1px solid var(--border-color) !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 1rem !important;
 }
 
-.dark-theme .search-container form {
-    background-color: transparent !important;
+.dark-theme .condition-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Notification */
