@@ -38,10 +38,6 @@ A beautiful weather dashboard that brings you real-time weather updates with sty
 -   `style.css` - Styling
 -   `script.js` - Functionality
 
-## 📱 Compatibility
-
-Works great on all modern browsers and devices!
-
 ## 📄 License
 
 Open source under the MIT License
